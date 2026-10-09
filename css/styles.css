@@ -1,0 +1,32 @@
+/* ==========================================================================
+   ESTILOS PERSONALIZADOS - PROYECTO COMMUNICATION
+   Módulo: Autenticación
+   ========================================================================== */
+
+/* Fondo general suave con gradiente */
+body {
+    background: linear-gradient(135deg, #eef2f3 0%, #8e9eab 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Sombra suave para la tarjeta de autenticación */
+.card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Efectos visuales para los botones de las pestañas */
+.nav-pills .nav-link {
+    color: #6c757d;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+}
+
+.nav-pills .nav-link.active {
+    background-color: #0d6efd;
+    color: #ffffff;
+}
+
+/* Transiciones para inputs */
+.form-control:focus {
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+}
