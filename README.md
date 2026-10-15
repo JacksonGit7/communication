@@ -1,19 +1,36 @@
-# Proyecto Communication - Módulo de Autenticación
+# 🏢 Comunication - Portal Residencial
 
-Este proyecto forma parte de la evidencia **GA7-220501096-AA3-EV01** del programa de formación Analisis y Desarrollo de Software (SENA).
+**Comunication** es una aplicación web modular diseñada para la gestión integral de conjuntos residenciales y condominios. Permite la interacción en tiempo real entre administradores y residentes para la consulta de novedades, eventos, pagos, notificaciones y directorio de residentes.
 
-## Tecnologías Utilizadas
-- **HTML5**: Estructura semántica de la aplicación.
-- **CSS3**: Estilos personalizados.
-- **Bootstrap 5 (Framework)**: Framework de estilos para la maquetación responsiva y componentes interactivos.
-- **JavaScript (ES6)**: Lógica de validación de formularios y dinamismo de la interfaz.
-- **Git / GitHub**: Control de versiones.
+---
 
-## Funcionalidades del Módulo
-1. **Inicio de Sesión**: Validación de credenciales y feedback dinámico al usuario.
-2. **Registro de Usuarios**: Captura de datos con validaciones de campos obligatorios y formato.
-3. **Pestañas dinámicas**: Cambio fluido entre Login y Registro sin recargar la página.
+## 🚀 Tecnologías Utilizadas
 
-## Cómo ejecutar el proyecto
-1. Clonar el repositorio.
-2. Abrir el archivo `index.html` en cualquier navegador web.
+* **Frontend:** HTML5, CSS3 (Variables CSS, diseño responsivo), JavaScript, Lucide Icons.
+* **Backend:** Node.js, Express.js.
+* **Middleware / Utilidades:** CORS, Body-Parser.
+* **Herramientas de Diseño & Pruebas:** Figma, Postman, Git / GitHub.
+
+---
+
+## 📂 Estructura del Proyecto
+
+```text
+communication/
+├── api-communication/         # Servidor Backend (Node.js/Express)
+│   ├── index.js               # API RESTful y endpoints
+│   ├── package.json           # Dependencias
+│   └── node_modules/
+    └── index.html             # Aplicación Frontend Modular unificada
+├── README.md                  # Documentación del proyecto
+└── docs/                      # Archivos de soporte (Colección de Postman)
+
+## ⚙️ Pasos para Ejecutar el Proyecto Localmente
+
+### 1. Iniciar el Servidor Backend
+**⚠️ Nota importante:** Debes ubicarte dentro de la carpeta del servidor antes de instalar las dependencias y ejecutarlo:
+
+```bash
+cd api-communication
+npm install
+node index.js
