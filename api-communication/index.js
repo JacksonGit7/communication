@@ -1,72 +1,70 @@
 const express = require('express');
-const app = express();
-const PORT = process.env.PORT || 3000;
+const cors = require('cors'); // Habilita la comunicación desde el navegador
 
+const app = express();
+
+// Middleware
+app.use(cors()); // Importante: Permite las peticiones desde el index.html
 app.use(express.json());
 
-// Base de datos simulada
+// Base de datos simulada en memoria
 let usuarios = [
-    { id: 1, nombre: "Admin Communication", email: "admin@communication.com", rol: "Administrador" },
-    { id: 2, nombre: "Jackson Vergel", email: "aprendiz@sena.edu.co", rol: "Aprendiz ADSO" }
+  { 
+    id: 1, 
+    nombre: "Carlos Mendoza", 
+    email: "carlos.mendoza@email.com", 
+    password: "123", 
+    rol: "Residente - Apto 402" 
+  }
 ];
 
 let mensajes = [
-    { id: 1, autor: "Jackson Vergel", contenido: "¡Bienvenido al sistema de comunicación del proyecto!", fecha: "2026-10-11" }
+  { id: 1, autor: "Jackson Vergel (Admin)", contenido: "Bienvenidos al sistema de comunicación oficial." }
 ];
 
-// 1. Ruta principal
+// Rutas / Endpoints
 app.get('/', (req, res) => {
-    res.json({ 
-        estado: "Activo",
-        mensaje: "API del proyecto Communication funcionando correctamente (EV3)",
-        version: "1.0.0"
-    });
+  res.json({ mensaje: "API Communication Activa y Funcionando" });
 });
 
-// 2. Servicios de Usuarios
+// Obtener Usuarios
 app.get('/api/usuarios', (req, res) => {
-    res.json({ total: usuarios.length, data: usuarios });
+  res.json(usuarios);
 });
 
+// Crear Usuario
 app.post('/api/usuarios', (req, res) => {
-    const { nombre, email, rol } = req.body;
-    if (!nombre || !email) {
-        return res.status(400).json({ error: "El nombre y el correo son obligatorios" });
-    }
-    const nuevoUsuario = { id: usuarios.length + 1, nombre, email, rol: rol || "Usuario Estándar" };
-    usuarios.push(nuevoUsuario);
-    res.status(201).json({ mensaje: "Usuario creado exitosamente", data: nuevoUsuario });
+  const nuevoUsuario = { id: usuarios.length + 1, ...req.body };
+  usuarios.push(nuevoUsuario);
+  res.status(201).json({ mensaje: "Usuario creado con éxito", usuario: nuevoUsuario });
 });
 
-// 3. Servicios de Mensajes
-app.get('/api/mensajes', (req, res) => {
-    res.json({ total: mensajes.length, data: mensajes });
-});
-
-app.post('/api/mensajes', (req, res) => {
-    const { autor, contenido } = req.body;
-    if (!autor || !contenido) {
-        return res.status(400).json({ error: "El autor y el contenido son obligatorios" });
-    }
-    const nuevoMensaje = { id: mensajes.length + 1, autor, contenido, fecha: new Date().toISOString().split('T')[0] };
-    mensajes.push(nuevoMensaje);
-    res.status(201).json({ mensaje: "Mensaje publicado exitosamente", data: nuevoMensaje });
-});
-
-// 4. Autenticación (Login)
+// Login de Usuario
 app.post('/api/usuarios/login', (req, res) => {
-    const { email, password } = req.body;
-    if (email === "aprendiz@sena.edu.co" && password === "123") {
-        res.json({ 
-            mensaje: "Login exitoso", 
-            token: "communication-token-sena",
-            usuario: { email, rol: "Aprendiz ADSO" }
-        });
-    } else {
-        res.status(401).json({ error: "Credenciales inválidas" });
-    }
+  const { email, password } = req.body;
+  const usuario = usuarios.find(u => u.email === email && u.password === password);
+
+  if (usuario) {
+    res.json({ mensaje: "Autenticación exitosa", token: "token-simulado-12345", usuario });
+  } else {
+    res.status(401).json({ mensaje: "Credenciales incorrectas" });
+  }
 });
 
+// Obtener Mensajes
+app.get('/api/mensajes', (req, res) => {
+  res.json(mensajes);
+});
+
+// Publicar Mensaje
+app.post('/api/mensajes', (req, res) => {
+  const nuevoMensaje = { id: mensajes.length + 1, ...req.body };
+  mensajes.push(nuevoMensaje);
+  res.status(201).json({ mensaje: "Anuncio publicado", anuncio: nuevoMensaje });
+});
+
+// Puerto de ejecución
+const PORT = 3000;
 app.listen(PORT, () => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+  console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
