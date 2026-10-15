@@ -21,9 +21,12 @@ communication/
 │   ├── index.js               # API RESTful y endpoints
 │   ├── package.json           # Dependencias
 │   └── node_modules/
-    └── index.html             # Aplicación Frontend Modular unificada
+├── index.html                 # Aplicación Frontend Modular unificada
 ├── README.md                  # Documentación del proyecto
 └── docs/                      # Archivos de soporte (Colección de Postman)
+
+---
+
 
 ## ⚙️ Pasos para Ejecutar el Proyecto Localmente
 
@@ -31,6 +34,7 @@ communication/
 **⚠️ Nota importante:** Debes ubicarte dentro de la carpeta del servidor antes de instalar las dependencias y ejecutarlo:
 
 ```bash
+
 cd api-communication
 npm install
 node index.js
